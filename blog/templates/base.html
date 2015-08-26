@@ -8,11 +8,12 @@
 
     <body>
         <header>
+            <h1 id="site-title"> {{ config["BLOG"]["site_title"] }} </h1>
             <nav class="group">
-                <a href="/"><i class="fa fa-home"></i>Home</a>
+                <a href="{{ url_for("index") }}"><i class="fa fa-home"></i>Home</a>
                 <a href="/tag/"><i class="fa fa-tags"></i>Tags</a>
                 <a href="/category/"><i class="fa fa-book"></i>Categories</a>
-          </nav>
+            </nav>
         </header>
 
         <section class="content">
