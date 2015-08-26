@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/static/css/style.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+        {% block title %} {% endblock %}
+    </head>
+
+    <body>
+        <header>
+            <nav class="group">
+                <a href="/"><i class="fa fa-home"></i>Home</a>
+                <a href="/tag/"><i class="fa fa-tags"></i>Tags</a>
+                <a href="/category/"><i class="fa fa-book"></i>Categories</a>
+          </nav>
+        </header>
+
+        <section class="content">
+            {% block content %} {% endblock %}
+        </section>
+
+        {% block tail_scripts %} {% endblock %}
+    </body>
+</html>
