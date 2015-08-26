@@ -27,7 +27,7 @@ class Post:
                     if name == "keywords":
                         data = [s.strip() for s in data.split(",")]
                     elif name == "revdate":
-                        data = dt.datetime.strptime(data, "%Y-%m-%d")
+                        data = dt.datetime.strptime(data, "%Y-%m-%d").date()
 
                     metadata[name] = data
 

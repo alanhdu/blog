@@ -17,5 +17,7 @@ posts = list(load("posts"))
 with open("config.yml") as fin:
     app.config["BLOG"] = yaml.load(fin)
 
+app.config["BLOG"]["posts"] = posts
+
 if __name__ == "__main__":
     app.run(debug=True)

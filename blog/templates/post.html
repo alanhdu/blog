@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %} {{ post.metadata.title }} {% endblock %}
+
+{% block content %}
+{% set date = post.metadata.revdate %}
+<iframe src="{{ url_for("raw_post", year=date.year, month=date.month, day=date.day) }}">
+</iframe>
+{% endblock %}
