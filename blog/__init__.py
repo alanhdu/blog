@@ -23,7 +23,7 @@ def index(page):
     return render_template("index.html", posts=posts, page=page,
                            last_page=last_page)
 
-@app.route("/categories")
+@app.route("/categories.html")
 def categories():
     groups = toolz.groupby(lambda x: x.category,
                            app.config["BLOG"]["posts"])

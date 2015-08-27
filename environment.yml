@@ -7,3 +7,4 @@ dependencies:
 - toolz=0.7.4
 - pip:
   - beautifulsoup4
+  - Frozen-Flask

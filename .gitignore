@@ -3,5 +3,7 @@
 *.swo
 *.swp
 
+build
+
 posts
 drafts
