@@ -1,4 +1,4 @@
 {% macro post_url(post) -%}
-{{ url_for("post", year=post.metadata.revdate.year,
-           month=post.metadata.revdate.month, day=post.metadata.revdate.day) }}
+{{ url_for("post", year=post.revdate.year, month=post.revdate.month,
+           day=post.revdate.day) }}
 {%- endmacro %}

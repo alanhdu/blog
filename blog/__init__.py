@@ -11,13 +11,13 @@ def index():
 
 @app.route("/categories")
 def categories():
-    groups = toolz.groupby(lambda x: x.metadata.category,
+    groups = toolz.groupby(lambda x: x.category,
                            app.config["BLOG"]["posts"])
     return render_template("categories.html", groups=groups)
 
 def get_post(date: dt.date) -> "Optional[Post]":
     for p in app.config["BLOG"]["posts"]:
-        if p.metadata.revdate == date:
+        if p.revdate == date:
             return p
 
 @app.route("/<int:year>/<int:month>/<int:day>/")

@@ -8,13 +8,11 @@ import subprocess
 converter = "asciidoctor"
 metadata_regex = re.compile(r"^:(.*?): *(.*)$")
 
-fields = ["title", "category", "keywords", "revdate", "description"]
-Metadata = namedtuple("Metadata", fields)
+fields = ["title", "category", "keywords", "revdate", "description", "path"]
 
-class Post:
-    def __init__(self, path):
-        self.path = path           # keep for debugging purposes
-        metadata = {}
+class Post(namedtuple("Post", fields)):
+    def __new__(cls, path):
+        metadata = {"path": path}
 
         with open(path) as fin:
             for line in fin:
@@ -31,7 +29,7 @@ class Post:
 
                     metadata[name] = data
 
-        self.metadata = Metadata(**metadata)
+        return super().__new__(cls, **metadata)
 
     def to_html(self) -> str:
         args = [converter, "--out-file", "-", "--no-header-footer", self.path]
