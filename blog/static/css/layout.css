@@ -3,7 +3,8 @@ body {
 }
 
 #site-title {
-    text-align: center
+    text-align: center;
+    font-size: 2.6em;
 }
 
 nav.navbar {
@@ -13,7 +14,7 @@ nav.navbar {
 
 nav.navbar > ul {
     margin-bottom: 0;
-    max-width: 900px;
+    max-width: 800px;
     margin: auto;
 }
 
@@ -29,7 +30,7 @@ a.nav-link {
 
 .page-content {
     background-color: #FFF;
-    max-width: 1000px;
+    max-width: 900px;
     padding: 2.5em;
     padding-top: 0;
     margin: auto;
@@ -59,7 +60,9 @@ a.nav-link {
 .post-description {
     margin-bottom: 0.25em;
     margin-left: 2em;
-    font-size: 1.5em;
+    font-size: 1.25em;
+    font-style: italic;
+    font-weight: bold;
 }
 
 .post-title {
