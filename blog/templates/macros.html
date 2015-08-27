@@ -15,10 +15,10 @@
         <i class="fa fa-calendar"></i> {{ post.revdate.strftime("%B %d, %Y") }}
     </time>
     <div>
-        {{ post.category }}:
+        <a href="{{ url_for("categories") }}">{{ post.category | title}}</a>:
         <span class="post-tags">
             {% for tag in post.keywords %}
-            <span class="post-tag"><i class="fa fa-tag"></i> {{ tag }} </span>
+            <span class="post-tag"><i class="fa fa-tag"></i> {{ tag | title}} </span>
             {% endfor %}
         </span>
     </div>
