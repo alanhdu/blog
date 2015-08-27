@@ -1,0 +1,9 @@
+name: blog
+dependencies:
+- beautiful-soup
+- flask=0.10.1
+- python=3.4.3
+- pyyaml=3.11
+- toolz=0.7.4
+- pip:
+  - beautifulsoup4
