@@ -8,6 +8,22 @@
             title="{{ config["BLOG"]["site_title"] }}"
             type="application/atom+xml">
 
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [["\\(", "\\)"]],
+            displayMath: [["\\[", "\\]"]],
+            ignoreClass: "nostem|nolatexmath"
+          },
+          asciimath2jax: {
+            delimiters: [["\\$", "\\$"]],
+            ignoreClass: "nostem|noasciimath"
+          },
+          TeX: { equationNumbers: { autoNumber: "none" } }
+        });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.4.0/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+
         <title>{% block title %}{% endblock %}</title>
     </head>
 
@@ -25,7 +41,7 @@
             </nav>
         </header>
 
-        <section class="content">
+        <section class="page-content">
             {% block content %} {% endblock %}
         </section>
 

@@ -29,6 +29,9 @@ class Post(namedtuple("Post", fields)):
 
                     metadata[name] = data
 
+        metadata.pop("stem", None)
+
+
         return super().__new__(cls, **metadata)
 
     def to_html(self) -> str:
