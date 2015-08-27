@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% import "macros.html" as macros %}
+
+{% block title %} Categories {% endblock %}
+
+{% block content %}
+{% for category, posts in groups.items() %}
+<h1 class="category-name"> {{ category }} </h1>
+<ul>
+    {% for post in posts %}
+    <li> <a href="{{ macros.post_url(post) }}"> {{ post.metadata.title }} </a></li>
+    {% endfor %}
+</ul>
+{% endfor %}
+{% endblock %}
