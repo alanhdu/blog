@@ -1,6 +1,6 @@
 --- 
-name: "Alan Du"
+author: "Alan Du"
 email: "ahd2125@columbia.edu"
 
 site_title: "Something Interesting"
-base_path: "https://www.columbia.edu/~ahd2125"
+base_url: "https://www.columbia.edu/~ahd2125"

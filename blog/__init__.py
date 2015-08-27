@@ -1,6 +1,8 @@
 import datetime as dt
+from urllib.parse import urljoin
 
-from flask import Flask, render_template, abort, redirect, url_for
+from flask import Flask, render_template, abort, request, url_for
+from werkzeug.contrib.atom import AtomFeed
 import toolz
 
 app = Flask(__name__)
@@ -39,3 +41,18 @@ def post(year, month, day):
         abort(404)
 
     return render_template("post.html", post=post)
+
+@app.route("/feed.atom")
+def atom_feed():
+    feed = AtomFeed(app.config["BLOG"]["site_title"],
+                    feed_url=request.url, url=app.config["BLOG"]["base_url"])
+    for post in app.config["BLOG"]["posts"]:
+        url = url_for("post", year=post.revdate.year, month=post.revdate.month,
+                      day=post.revdate.day)
+        update = dt.datetime(year=post.revdate.year, month=post.revdate.month,
+                             day=post.revdate.day)
+        feed.add(post.title, post.to_html(), content_type="html",
+                 author=app.config["BLOG"]["author"], updated=update,
+                 url=urljoin(app.config["BLOG"]["base_url"], url))
+
+    return feed.get_response()
