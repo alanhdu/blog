@@ -34,7 +34,7 @@ class Post:
         self.metadata = Metadata(**metadata)
 
     def to_html(self) -> str:
-        args = [converter, "--out-file", "-", self.path]
+        args = [converter, "--out-file", "-", "--no-header-footer", self.path]
         p = subprocess.Popen(args, stdout=subprocess.PIPE)
         stdout, __ = p.communicate()
         return stdout.decode("utf-8")

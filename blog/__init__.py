@@ -22,11 +22,3 @@ def post(year, month, day):
         abort(404)
 
     return render_template("post.html", post=post)
-
-@app.route("/<int:year>/<int:month>/<int:day>/raw")
-def raw_post(year, month, day):
-    post = get_post(dt.date(year=year, month=month, day=day))
-    if post is None:
-        abort(404)
-
-    return post.to_html()

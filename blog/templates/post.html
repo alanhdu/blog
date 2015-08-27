@@ -1,9 +1,27 @@
 {% extends "base.html" %}
 
-{% block title %} {{ post.metadata.title }} {% endblock %}
+{% block title %} 
+{{ post.metadata.title }} 
+{% endblock %}
 
 {% block content %}
-{% set date = post.metadata.revdate %}
-<iframe src="{{ url_for("raw_post", year=date.year, month=date.month, day=date.day) }}">
-</iframe>
+<article>
+    <header id="post-header">
+        <h1 id="post-title"> {{ post.metadata.title }} </h1>
+        <p id="post-description"> Or, {{ post.metadata.description }} </p>
+        <time id="post-date" datetime={{ post.metadata.revdate.isoformat() }}>
+            <i class="fa fa-calendar"></i> {{ post.metadata.revdate.strftime("%B %d, %Y") }}
+        </time>
+        <div>
+            {{ post.metadata.category }}:
+            <span id="post-tags">
+                {% for tag in post.metadata.keywords %}
+                <span><i class="fa fa-tag"></i> {{ tag }} </span>
+                {% endfor %}
+            </span>
+        </div>
+    </header>
+
+    {{ post.to_html() | safe }}
+</article>
 {% endblock %}
