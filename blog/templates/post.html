@@ -14,12 +14,14 @@
             {{ post.category }}:
             <span id="post-tags">
                 {% for tag in post.keywords %}
-                <span><i class="fa fa-tag"></i> {{ tag }} </span>
+                <span class="post-tag"><i class="fa fa-tag"></i> {{ tag }} </span>
                 {% endfor %}
             </span>
         </div>
     </header>
 
-    {{ post.to_html() | safe }}
+    <section id="post-content">
+        {{ post.to_html() | safe }}
+    </section>
 </article>
 {% endblock %}

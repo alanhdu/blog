@@ -6,7 +6,7 @@
 
 {% block content %}
 {% for category, posts in groups.items() %}
-<h1 class="category-name"> {{ category }} </h1>
+<h1 class="category-name"> {{ category | title }} </h1>
 <ul>
     {% for post in posts %}
     <li> <a href="{{ macros.post_url(post) }}"> {{ post.title }} </a></li>

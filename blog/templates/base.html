@@ -1,6 +1,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="{{ url_for("static", filename="css/asciidoctor.css") }}">
+        <link rel="stylesheet" href="{{ url_for("static", filename="css/layout.css") }}">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
         <title>{% block title %}{% endblock %}</title>
@@ -9,9 +10,14 @@
     <body>
         <header>
             <h1 id="site-title"> {{ config["BLOG"]["site_title"] }} </h1>
-            <nav class="group">
-                <a href="{{ url_for("index") }}"><i class="fa fa-home"></i>Home</a>
-                <a href="{{ url_for("categories") }}"><i class="fa fa-book"></i>Categories</a>
+            <nav class="navbar">
+                
+                <ul id="nav-links">
+                    <li><a class="nav-link" href="{{ url_for("index") }}">
+                            <i class="fa fa-home"></i>Home</a></li>
+                    <li><a class="nav-link" href="{{ url_for("categories") }}">
+                            <i class="fa fa-book"></i>Categories</a></li>
+                </ul>
             </nav>
         </header>
 
