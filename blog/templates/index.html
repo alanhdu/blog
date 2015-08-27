@@ -1,3 +1,13 @@
 {% extends "base.html" %}
 
-{% block title %} {% endblock %}
+{% import "macros.html" as macros %}
+
+{% block title %}  {{ config["BLOG"]["site_title"] }} {% endblock %}
+
+{% block content %}
+
+{% for post in posts %}
+{{ macros.post_header(post, link=True) }}
+{% endfor %}
+
+{% endblock %}

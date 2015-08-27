@@ -1,24 +1,12 @@
 {% extends "base.html" %}
+{% import "macros.html" as macros %}
 
 {% block title %} {{ post.title }} {% endblock %}
 
+
 {% block content %}
 <article>
-    <header id="post-header">
-        <h1 id="post-title"> {{ post.title }} </h1>
-        <p id="post-description"> Or, {{ post.description }} </p>
-        <time id="post-date" datetime={{ post.revdate.isoformat() }}>
-            <i class="fa fa-calendar"></i> {{ post.revdate.strftime("%B %d, %Y") }}
-        </time>
-        <div>
-            {{ post.category }}:
-            <span id="post-tags">
-                {% for tag in post.keywords %}
-                <span class="post-tag"><i class="fa fa-tag"></i> {{ tag }} </span>
-                {% endfor %}
-            </span>
-        </div>
-    </header>
+    {{ macros.post_header(post) }}
 
     <section id="post-content">
         {{ post.to_html() | safe }}

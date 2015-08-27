@@ -5,9 +5,21 @@ import toolz
 
 app = Flask(__name__)
 
-@app.route("/")
-def index():
-    return render_template("index.html")
+def paginate(page, per_page=10):
+    posts = app.config["BLOG"]["posts"]
+    return posts[per_page * (page - 1): per_page * page]
+
+@app.route("/", defaults={"page": 1})
+@app.route("/<int:page>")
+def index(page):
+    posts = paginate(page)
+    if not posts:
+        abort(404)
+
+    last_page = len(paginate(page + 1)) == 0
+
+    return render_template("index.html", posts=posts, page=page,
+                           last_page=last_page)
 
 @app.route("/categories")
 def categories():
@@ -20,7 +32,7 @@ def get_post(date: dt.date) -> "Optional[Post]":
         if p.revdate == date:
             return p
 
-@app.route("/<int:year>/<int:month>/<int:day>/")
+@app.route("/post/<int:year>/<int:month>/<int:day>/")
 def post(year, month, day):
     post = get_post(dt.date(year=year, month=month, day=day))
     if post is None:

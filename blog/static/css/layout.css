@@ -36,10 +36,16 @@ a.nav-link {
 }
 
 /****************** Post Title Stuf ***************/
-#post-header > div {
+.post-header > div {
     margin-top: 0.7em;
 }
-#post-tags {
+
+.post-header {
+    padding-bottom: 1em;
+    border-bottom: 1px solid #CCC;
+}
+
+.post-tags {
     margin-left: 3em;
 }
 .post-tag {
@@ -50,18 +56,13 @@ a.nav-link {
     padding: 0px 4px;
 }
 
-#post-content {
-    margin-top: 1em;
-    border-top: 1px solid #CCC;
-}
-
-#post-description {
+.post-description {
     margin-bottom: 0.25em;
     margin-left: 2em;
     font-size: 1.5em;
 }
 
-#post-title {
+.post-title {
     margin-bottom: 0;
     padding-top: 0.25em;
 }

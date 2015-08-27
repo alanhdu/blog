@@ -12,7 +12,7 @@ def load(basedir):
         for fname in fnmatch.filter(fnames, "*.adoc"):
             yield Post(os.path.join(root, fname))
 
-posts = list(load("posts"))
+posts = sorted(load("posts"), key=lambda x: x.revdate, reverse=True)
 
 with open("config.yml") as fin:
     app.config["BLOG"] = yaml.load(fin)
