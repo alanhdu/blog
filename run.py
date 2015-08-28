@@ -1,5 +1,4 @@
 import fnmatch
-import itertools
 import os
 import sys
 
@@ -7,25 +6,26 @@ import yaml
 from flask_frozen import Freezer
 
 from blog import app
+from config import config
 from post import Post
 
 
-def load(basedir):
-    for root, __, fnames in os.walk(basedir):
-        for fname in fnmatch.filter(fnames, "*.adoc"):
-            path = os.path.join(root, fname)
-            try:
-                yield Post(path)
-            except Exception as e:
-                raise RuntimeError("Error loading", path) from e
+def load(*args, freeze=False):
+    for basedir in args:
+        for root, __, fnames in os.walk(basedir):
+            for fname in fnmatch.filter(fnames, "*.adoc"):
+                path = os.path.join(root, fname)
+                try:
+                    yield Post(path, freeze=freeze)
+                except Exception as e:
+                    raise RuntimeError("Error loading", path) from e
 
-with open("config.yml") as fin:
-    app.config["BLOG"] = yaml.load(fin)
+app.config["BLOG"] = config
 
 
 if __name__ == "__main__":
     if len(sys.argv) >= 2 and sys.argv[1] == "build":
-        posts = sorted(itertools.chain(load("posts"), load("drafts")),
+        posts = sorted(load("posts", "drafts", freeze=True),
                        key=lambda x: x.revdate, reverse=True)
         app.config["BLOG"]["posts"] = posts
         app.config["FREEZER_BASE_URL"] = app.config["BLOG"]["base_url"]
@@ -34,6 +34,7 @@ if __name__ == "__main__":
         freezer = Freezer(app)
         freezer.freeze()
     else:
-        posts = sorted(load("posts"), key=lambda x: x.revdate, reverse=True)
+        posts = sorted(load("posts", freeze=False),
+                       key=lambda x: x.revdate, reverse=True)
         app.config["BLOG"]["posts"] = posts
         app.run(debug=True)

@@ -14,7 +14,7 @@ def paginate(page):
     return posts[per_page * (page - 1): per_page * page]
 
 @app.route("/", defaults={"page": 1})
-@app.route("/<int:page>")
+@app.route("/<int:page>.html")
 def index(page, per_page=10):
     posts = app.config["BLOG"]["posts"]
     this_page = posts[per_page * (page - 1): per_page * page]

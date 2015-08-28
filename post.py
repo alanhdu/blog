@@ -4,14 +4,21 @@ from collections import namedtuple
 import datetime as dt
 import re
 import subprocess
+import tempfile
+import urllib.parse
+
+from config import config
 
 converter = "asciidoctor"
 metadata_regex = re.compile(r"^:(.*?): *(.*)$")
 
-fields = ["title", "category", "keywords", "revdate", "description", "path"]
+base_path = urllib.parse.urlparse(config["base_url"]).path
+
+fields = ["title", "category", "keywords", "revdate", "description", "path",
+          "freeze"]
 
 class Post(namedtuple("Post", fields)):
-    def __new__(cls, path):
+    def __new__(cls, path, freeze=False):
         metadata = {"path": path}
 
         with open(path) as fin:
@@ -32,10 +39,24 @@ class Post(namedtuple("Post", fields)):
         for key in {"stem", "source-highlighter"}:
             metadata.pop(key, None)
 
-        return super().__new__(cls, **metadata)
+        return super().__new__(cls, freeze=freeze, **metadata)
 
     def to_html(self) -> str:
-        args = [converter, "--out-file", "-", "--no-header-footer", self.path]
-        p = subprocess.Popen(args, stdout=subprocess.PIPE)
-        stdout, __ = p.communicate()
-        return stdout.decode("utf-8")
+        if self.freeze:
+            with open(self.path) as fin:
+                text = fin.read()
+            with tempfile.NamedTemporaryFile() as fout:
+                text = text.replace("link:/", "link:" + base_path + "/")
+                fout.write(text.encode())
+
+
+                return convert(fout.name)
+        else:
+            return convert(self.path)
+
+def convert(fname) -> str:
+    args = [converter, "--out-file", "-", "--no-header-footer", fname]
+    p = subprocess.Popen(args, stdout=subprocess.PIPE)
+    stdout, __ = p.communicate()
+
+    return stdout.decode("utf-8")
