@@ -29,8 +29,8 @@ class Post(namedtuple("Post", fields)):
 
                     metadata[name] = data
 
-        metadata.pop("stem", None)
-
+        for key in {"stem", "source-highlighter"}:
+            metadata.pop(key, None)
 
         return super().__new__(cls, **metadata)
 
