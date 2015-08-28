@@ -10,4 +10,20 @@
 {{ macros.post_header(post, link=True) }}
 {% endfor %}
 
+{% if num_pages > 1 %}
+<div class="pagination">
+    {% if page == 2 %}
+    <a class="page-nav" href="{{ url_for("index") }}">Previous</a>
+    {% elif page > 2 %}
+    <a class="page-nav" href="{{ url_for("index", page=page - 1) }}">Previous</a>
+    {% endif %}
+
+    Page {{ page }} of {{ num_pages }}
+
+    {% if page != num_pages %}
+    <a class="page-nav" href="{{ url_for("index", page=page + 1) }}">Next</a>
+    {% endif %}
+</div>
+{% endif %}
+
 {% endblock %}

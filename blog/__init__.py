@@ -1,4 +1,5 @@
 import datetime as dt
+import math
 from urllib.parse import urljoin
 
 from flask import Flask, render_template, abort, request, url_for
@@ -7,21 +8,24 @@ import toolz
 
 app = Flask(__name__)
 
-def paginate(page, per_page=10):
+def paginate(page):
     posts = app.config["BLOG"]["posts"]
+    per_page = app.config["PER_PAGE"]
     return posts[per_page * (page - 1): per_page * page]
 
 @app.route("/", defaults={"page": 1})
 @app.route("/<int:page>")
-def index(page):
-    posts = paginate(page)
-    if not posts:
+def index(page, per_page=10):
+    posts = app.config["BLOG"]["posts"]
+    this_page = posts[per_page * (page - 1): per_page * page]
+
+    if not this_page or page < 1:
         abort(404)
 
-    last_page = len(paginate(page + 1)) == 0
+    num_pages = math.ceil(len(posts) / per_page)
 
-    return render_template("index.html", posts=posts, page=page,
-                           last_page=last_page)
+    return render_template("index.html", posts=this_page, page=page,
+                           num_pages=num_pages)
 
 @app.route("/categories.html")
 def categories():
