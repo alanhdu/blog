@@ -48,7 +48,7 @@ class Post(namedtuple("Post", fields)):
             with tempfile.NamedTemporaryFile() as fout:
                 text = text.replace("link:/", "link:" + base_path + "/")
                 fout.write(text.encode())
-
+                fout.flush()
 
                 return convert(fout.name)
         else:

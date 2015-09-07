@@ -25,7 +25,7 @@ app.config["BLOG"] = config
 
 if __name__ == "__main__":
     if len(sys.argv) >= 2 and sys.argv[1] == "build":
-        posts = sorted(load("posts", "drafts", freeze=True),
+        posts = sorted(load("posts", freeze=True),
                        key=lambda x: x.revdate, reverse=True)
         app.config["BLOG"]["posts"] = posts
         app.config["FREEZER_BASE_URL"] = app.config["BLOG"]["base_url"]
@@ -34,7 +34,7 @@ if __name__ == "__main__":
         freezer = Freezer(app)
         freezer.freeze()
     else:
-        posts = sorted(load("posts", freeze=False),
+        posts = sorted(load("posts", "drafts", freeze=False),
                        key=lambda x: x.revdate, reverse=True)
         app.config["BLOG"]["posts"] = posts
         app.run(debug=True)
