@@ -23,7 +23,7 @@ class Post(namedtuple("Post", fields)):
 
         with open(path) as fin:
             for line in fin:
-                if line.startswith("= "):
+                if line.startswith("= ") and "title" not in metadata:
                     metadata["title"] = line[2:].strip()
 
                 m = metadata_regex.match(line)
@@ -36,7 +36,7 @@ class Post(namedtuple("Post", fields)):
 
                     metadata[name] = data
 
-        for key in {"stem", "source-highlighter"}:
+        for key in {"stem", "source-highlighter", "icons"}:
             metadata.pop(key, None)
 
         return super().__new__(cls, freeze=freeze, **metadata)
