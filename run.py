@@ -1,5 +1,6 @@
 import fnmatch
 import os
+import subprocess
 import sys
 
 import yaml
@@ -33,6 +34,7 @@ if __name__ == "__main__":
 
         freezer = Freezer(app)
         freezer.freeze()
+        subprocess.check_call("./fix.sh")
     else:
         posts = sorted(load("posts", "drafts", freeze=False),
                        key=lambda x: x.revdate, reverse=True)
