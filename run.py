@@ -10,7 +10,6 @@ from blog import app
 from config import config
 from post import Post
 
-
 def load(*args, freeze=False):
     for basedir in args:
         for root, __, fnames in os.walk(basedir):
