@@ -1,8 +1,8 @@
 name: blog
 dependencies:
-- flask=0.10
+- flask
 - python=3.5
-- pyyaml=3.11
-- toolz=0.7
+- pyyaml
+- toolz
 - pip:
-  - Frozen-Flask==0.11
+  - Frozen-Flask
