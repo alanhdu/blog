@@ -1,8 +1,7 @@
 import fnmatch
 import os
-import subprocess
-import sys
 
+import click
 from flask_frozen import Freezer
 
 from blog import app
@@ -22,20 +21,34 @@ def load(dirs):
 app.config["BLOG"] = config
 
 
-if __name__ == "__main__":
-    if len(sys.argv) >= 2 and sys.argv[1] == "build":
-        posts = sorted(load(["posts"]),
-                       key=lambda post: post.revdate, reverse=True)
-        app.config["BLOG"]["posts"] = posts
-        app.config["FREEZER_BASE_URL"] = app.config["BLOG"]["base_url"]
-        app.config["FREEZER_DESTINATION"] = "../build"
+@click.group()
+def cli():
+    pass
 
-        app.static_url_path = app.config["BLOG"]["base_path"] + "static/"
-        freezer = Freezer(app)
-        freezer.freeze()
-    else:
-        posts = sorted(load(["posts", "drafts"]),
-                       key=lambda post: post.revdate, reverse=True)
-        app.config["BLOG"]["posts"] = posts
-        app.config["BLOG"]["base_path"] = "/"
-        app.run(debug=True)
+
+@cli.command()
+def serve():
+    """Host blog on http://localhost:5000"""
+    app.config["BLOG"]["posts"] = sorted(load(["posts", "drafts"]),
+                                         key=lambda post: post.revdate,
+                                         reverse=True)
+    app.config["BLOG"]["base_path"] = "/"
+    app.run(debug=True)
+
+
+@cli.command()
+def build():
+    """Build blog"""
+    app.config["BLOG"]["posts"] = sorted(load(["posts"]),
+                                         key=lambda post: post.revdate,
+                                         reverse=True)
+    app.config["FREEZER_BASE_URL"] = app.config["BLOG"]["base_url"]
+    app.config["FREEZER_DESTINATION"] = "../build"
+
+    app.static_url_path = app.config["BLOG"]["base_path"] + "static/"
+    freezer = Freezer(app)
+    freezer.freeze()
+
+
+if __name__ == "__main__":
+    cli()

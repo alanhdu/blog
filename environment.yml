@@ -1,5 +1,6 @@
 name: blog
 dependencies:
+- click
 - flask
 - python=3.5
 - pyyaml
