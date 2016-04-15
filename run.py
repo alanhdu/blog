@@ -30,9 +30,9 @@ if __name__ == "__main__":
         app.config["FREEZER_BASE_URL"] = app.config["BLOG"]["base_url"]
         app.config["FREEZER_DESTINATION"] = "../build"
 
+        app.static_url_path = app.config["BLOG"]["base_path"] + "static/"
         freezer = Freezer(app)
         freezer.freeze()
-        subprocess.check_call("./fix.sh")
     else:
         posts = sorted(load(["posts", "drafts"]),
                        key=lambda post: post.revdate, reverse=True)
