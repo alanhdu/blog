@@ -25,9 +25,7 @@ def get_asciidoc_metadata(path: str) -> dict:
                 elif name == "revdate":
                     data = dt.datetime.strptime(data, "%Y-%m-%d").date()
                 metadata[name] = data
-
-    return {key: value for key, value in metadata.items()
-            if key not in {"stem", "source-highlighter", "icons"}}
+    return metadata
 
 def convert(fname) -> str:
     args = [converter, "--out-file", "-", "--no-header-footer", fname]
@@ -40,6 +38,8 @@ class Post(object):
     def __init__(self, path: str):
         self.path = path
         self.metadata = get_asciidoc_metadata(path)
+        self.needs_pygments = "source-highlighter" in self.metadata
+        self.needs_mathjax = "stem" in self.metadata
 
         # set required fields
         for f in ["revdate", "category", "title", "description", "keywords"]:
