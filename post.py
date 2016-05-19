@@ -7,7 +7,6 @@ import tempfile
 
 from config import config
 
-converter = "asciidoctor"
 metadata_regex = re.compile(r"^:(.*?): *(.*)$")
 
 def get_asciidoc_metadata(path: str) -> dict:
@@ -28,7 +27,7 @@ def get_asciidoc_metadata(path: str) -> dict:
     return metadata
 
 def convert(fname) -> str:
-    args = [converter, "--out-file", "-", "--no-header-footer", fname]
+    args = ["asciidoctor", "--out-file", "-", "--no-header-footer", fname]
     p = subprocess.Popen(args, stdout=subprocess.PIPE)
     stdout, __ = p.communicate()
 
@@ -49,7 +48,9 @@ class Post(object):
         with open(self.path) as fin:
             text = fin.read()
 
-        text = text.replace("link:/", "link:" + config["base_path"])
+        text = text.replace("link:/", "link:" + config["base_path"]) \
+                   .replace("image::/", "image::" + config["base_path"]) \
+                   .replace("image:/", "image:" + config["base_path"])
         with tempfile.NamedTemporaryFile() as fout:
             fout.write(text.encode())
             fout.flush()
