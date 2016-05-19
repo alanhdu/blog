@@ -1,4 +1,4 @@
-import fnmatch
+import glob
 import os
 
 import click
@@ -10,13 +10,11 @@ from post import Post
 
 def load(dirs):
     for basedir in dirs:
-        for root, __, fnames in os.walk(basedir):
-            for fname in fnmatch.filter(fnames, "*.adoc"):
-                path = os.path.join(root, fname)
-                try:
-                    yield Post(path)
-                except Exception as e:
-                    raise RuntimeError("Error loading", path) from e
+        for path in glob.iglob(os.path.join(basedir, "**.adoc")):
+            try:
+                yield Post(path)
+            except Exception as e:
+                raise RuntimeError("Error loading", path) from e
 
 app.config["BLOG"] = config
 
@@ -46,6 +44,7 @@ def build():
     app.config["FREEZER_DESTINATION"] = "../build"
 
     app.static_url_path = app.config["BLOG"]["base_path"] + "static/"
+
     freezer = Freezer(app)
     freezer.freeze()
 
