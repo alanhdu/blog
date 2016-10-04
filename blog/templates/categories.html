@@ -9,7 +9,7 @@
 <h1 class="category-name" id={{ category }}> {{ category | title }} </h1>
 <ul>
   {% for post in posts %}
-  <li> <a href="{{ macros.post_url(post) }}"> {{ post.title }} </a></li>
+  <li> <a href="{{ macros.post_url(post) }}"> {{ post.title }} ({{ post.revdate }}) </a></li>
   {% endfor %}
 </ul>
 {% endfor %}
