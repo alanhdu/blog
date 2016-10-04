@@ -8,9 +8,9 @@
 {% for category, posts in groups.items() %}
 <h1 class="category-name"> {{ category | title }} </h1>
 <ul>
-    {% for post in posts %}
-    <li> <a href="{{ macros.post_url(post) }}"> {{ post.title }} </a></li>
-    {% endfor %}
+  {% for post in posts %}
+  <li> <a href="{{ macros.post_url(post) }}"> {{ post.title }} </a></li>
+  {% endfor %}
 </ul>
 {% endfor %}
 {% endblock %}

@@ -1,26 +1,26 @@
 {% macro post_url(post) -%}
 {{ url_for("post", year=post.revdate.year, month=post.revdate.month,
-           day=post.revdate.day) }}
+                   day=post.revdate.day) }}
 {%- endmacro %}
 
 {% macro post_header(post, link=False) %}
 <div class="post-header">
-    {% if link %}
-    <h1 class="post-title"><a href="{{ post_url(post) }}"> {{ post.title }} </a></h1>
-    {% else %}
-    <h1 class="post-title"> {{ post.title }} </h1>
-    {% endif %}
-    <p class="post-description"> Or, {{ post.description }} </p>
-    <time class="post-date" datetime={{ post.revdate.isoformat() }}>
-        <i class="fa fa-calendar"></i> {{ post.revdate.strftime("%B %d, %Y") }}
-    </time>
-    <div>
-        <a href="{{ url_for("categories") }}">{{ post.category | title}}</a>:
-        <span class="post-tags">
-            {% for tag in post.keywords %}
-            <span class="post-tag"><i class="fa fa-tag"></i> {{ tag | title}} </span>
-            {% endfor %}
-        </span>
-    </div>
+  {% if link %}
+  <h1 class="post-title"><a href="{{ post_url(post) }}"> {{ post.title }} </a></h1>
+  {% else %}
+  <h1 class="post-title"> {{ post.title }} </h1>
+  {% endif %}
+  <p class="post-description"> Or, {{ post.description }} </p>
+  <time class="post-date" datetime={{ post.revdate.isoformat() }}>
+    <i class="fa fa-calendar"></i> {{ post.revdate.strftime("%B %d, %Y") }}
+  </time>
+  <div>
+    <a href="{{ url_for("categories") }}">{{ post.category | title}}</a>:
+    <span class="post-tags">
+      {% for tag in post.keywords %}
+      <span class="post-tag"><i class="fa fa-tag"></i> {{ tag | title}} </span>
+      {% endfor %}
+    </span>
+  </div>
 </div>
 {% endmacro %}

@@ -30,9 +30,9 @@ MathJax.Hub.Config({
 
 {% block content %}
 <article>
-    {{ macros.post_header(post) }}
-    <section id="post-content">
-        {{ post.to_html() | safe }}
-    </section>
+  {{ macros.post_header(post) }}
+  <section id="post-content">
+    {{ post.to_html() | safe }}
+  </section>
 </article>
 {% endblock %}
