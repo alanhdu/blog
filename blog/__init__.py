@@ -1,6 +1,7 @@
 import datetime as dt
 import math
 from urllib.parse import urljoin
+from functools import partial
 
 from flask import Flask, render_template, abort, request, url_for
 from werkzeug.contrib.atom import AtomFeed
@@ -24,8 +25,12 @@ def index(page, per_page=10):
 
 @app.route("/categories.html")
 def categories():
-    groups = toolz.groupby(lambda x: x.category,
-                           app.config["BLOG"]["posts"])
+    groups = toolz.pipe(app.config["BLOG"]["posts"],
+                        partial(toolz.groupby, lambda x: x.category),
+                        partial(toolz.valmap,
+                                lambda group: sorted(group,
+                                                     key=lambda x: x.revdate,
+                                                     reverse=True)))
     return render_template("categories.html", groups=groups)
 
 @app.route("/post/<int:year>/<int:month>/<int:day>/")
