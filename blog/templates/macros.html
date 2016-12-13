@@ -10,7 +10,7 @@
   {% else %}
   <h1 class="post-title"> {{ post.title }} </h1>
   {% endif %}
-  <p class="post-description"> Or, {{ post.description }} </p>
+  <p class="post-description"> Or {{ post.description }} </p>
   <time class="post-date" datetime={{ post.revdate.isoformat() }}>
     <i class="fa fa-calendar"></i> {{ post.revdate.strftime("%B %d, %Y") }}
   </time>
