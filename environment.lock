@@ -1,0 +1,29 @@
+name: blog
+channels:
+- conda-forge
+- conda-canary
+- defaults
+dependencies:
+- conda-forge::certifi=2016.9.26=py35_0
+- conda-forge::click=6.6=py35_0
+- conda-forge::flask=0.11.1=py35_0
+- conda-forge::itsdangerous=0.24=py35_0
+- conda-forge::jinja2=2.8=py35_1
+- conda-forge::markupsafe=0.23=py35_0
+- conda-forge::ncurses=5.9=10
+- conda-forge::pip=9.0.1=py35_0
+- conda-forge::python=3.5.2=2
+- conda-forge::readline=6.2=0
+- conda-forge::setuptools=29.0.1=py35_1
+- conda-forge::sqlite=3.13.0=1
+- conda-forge::tk=8.5.19=1
+- conda-forge::toolz=0.8.2=py35_0
+- conda-forge::wheel=0.29.0=py35_0
+- conda-forge::xz=5.2.2=0
+- conda-forge::yaml=0.1.6=0
+- conda-forge::zlib=1.2.8=3
+- openssl=1.0.2j=0
+- pyyaml=3.12=py35_0
+- werkzeug=0.11.11=py35_1
+- pip:
+  - frozen-flask==0.13
