@@ -41,8 +41,13 @@ class Post(object):
         self.needs_mathjax = "stem" in self.metadata
 
         # set required fields
-        for f in ["revdate", "category", "title", "description", "keywords"]:
+        for f in ["revdate", "category", "title", "description"]:
             setattr(self, f, self.metadata.pop(f))
+
+        # set optional fields
+        for f in ["keywords"]:
+            if f in self.metadata:
+                setattr(self, f, self.metadata.pop(f))
 
     def to_html(self) -> str:
         with open(self.path) as fin:
