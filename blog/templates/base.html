@@ -5,13 +5,12 @@
     {% block scripts %}
     <link rel="stylesheet" href="{{ url_for("static", filename="css/asciidoctor.css") }}">
     <link rel="stylesheet" href="{{ url_for("static", filename="css/layout.css") }}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     {% endblock %}
-
-    <link href="{{ url_for("atom_feed") }}" rel="alternate"
-                                            title="{{ config["BLOG"]["site_title"] }}"
-                                            type="application/atom+xml">
-
+    <link href="{{ url_for("atom_feed") }}"
+          rel="alternate"
+          title="{{ config["BLOG"]["site_title"] }}"
+          type="application/atom+xml">
     <title>{% block title %}{% endblock %}</title>
   </head>
 
@@ -31,7 +30,5 @@
     <section class="page-content">
       {% block content %} {% endblock %}
     </section>
-
-    {% block tail_scripts %} {% endblock %}
   </body>
 </html>
