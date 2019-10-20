@@ -1,9 +1,0 @@
-name: blog
-dependencies:
-- click
-- flask
-- python=3.6
-- pyyaml
-- toolz
-- pip:
-  - Frozen-Flask
