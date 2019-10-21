@@ -1,0 +1,18 @@
+{{ define "main" }}
+{{ if eq .Data.Singular "tag" }}
+<h2>Entries tagged "{{ .Data.Term }}"</h2>
+{{ else }}
+<h2>Entries categorized as "{{ .Data.Term }}"</h2>
+{{ end }}
+
+<div class="posts">
+  {{ range .Data.Pages }}
+  <div class="post">
+    <div class="date">{{ dateFormat "Jan 2, 2006" .Date }}</div>
+    <a class="title" href="{{ .RelPermalink }}">{{.Title}},</a>
+    <span class="description">  Or {{ .Description }} </span>
+  </div>
+  {{ end }}
+  {{ template "_internal/pagination.html" . }}
+</div>
+{{ end }}

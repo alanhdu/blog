@@ -1,0 +1,13 @@
+{{ define "main" }}
+<h2 class="page-title">All {{ .Data.Plural }} </h2>
+
+{{ $data := .Data }}
+<ul class="tag-cloud">
+  {{ range $key, $value := .Data.Terms.ByCount }}
+  <li>
+    <a href="{{ $.Site.LanguagePrefix | absURL }}{{ $data.Plural }}/{{ $value.Name | urlize }}/">{{ $value.Name }} ({{ $value.Count }}) </a>
+  </li>
+  {{ end }}
+</div>
+</div>
+{{ end }}

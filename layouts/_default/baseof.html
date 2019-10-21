@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  {{ partial "header.html" . }}
+  <body>
+    <div class="container wrapper">
+      {{ partial "head.html" . }}
+      {{ block "main" . }} {{ end }}
+    </div>
+    <footer>
+      <nav class="nav">
+        <div>Inspired by the <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+      </nav>
+    </footer>
+  </body>
+</html>
