@@ -1,0 +1,11 @@
+{{ define "main" }}
+{{ $base_url := .Site.BaseURL }}
+<div class="post-header">
+  <h2 class="title">{{ .Title }}</h2>
+  <div><span class="date">Last updated {{ dateFormat "Jan 2, 2006" .Date }}</span></div>
+</div>
+
+<div class="markdown">
+  {{ .Content }}
+</div>
+{{ end }}
