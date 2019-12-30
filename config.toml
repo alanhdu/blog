@@ -2,26 +2,9 @@ baseURL = "https://alanhdu.github.io/"
 languageCode = "en-us"
 title = "Amateur Hour"
 
-pygmentsCodeFences = true
-pygmentsStyle = "monokai"
-
-[menu]
-  [[menu.main]]
-  name = "Home"
-  url = "/"
-  weight = 1
-
-  [[menu.main]]
-  name = "All posts"
-  url = "/posts"
-  weight = 2
-
-  [[menu.main]]
-  name = "About"
-  url = "/about"
-  weight = 3
-
-  [[menu.main]]
-  name = "Tags"
-  url = "/tags"
-  weight = 4
+[markup]
+  [markup.highlight]
+    codeFences = true
+    lineNos = true
+    style = "monokai"
+    tabWidth = 4
