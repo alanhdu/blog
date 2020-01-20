@@ -6,5 +6,5 @@
 build
 public
 
-posts
-drafts
+content/posts
+content/drafts
