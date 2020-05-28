@@ -3,8 +3,7 @@ body {
   line-height: 1.6;
   margin: auto auto;
   max-width: 50rem;
-  font-weight: 350;
-  font-family: "ubuntu", sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
 }
 
 @media screen and (max-width: 400px) {
