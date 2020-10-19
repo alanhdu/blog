@@ -4,16 +4,16 @@
   <h2 class="title">{{ .Title }}</h2>
   <strong class="description">Or {{ .Description }}</strong>
   <div>
-    <span class="date">{{ dateFormat "Jan 2, 2006" .Date }}</span>
+    <span class="date">{{ dateFormat "Jan 2, 2006" .Date }}</span>.
     Filed under
     {{ $category := .Params.categories}}
     <span class="category"> <a href="{{ $base_url }}categories/{{$category}}">{{ $category | humanize}}</a></span>
   </div>
   Tags:
     {{ range $i, $tag := .Params.tags }}
-    {{ if ne $i 0 }}, {{ end }}
-    <a href="{{ $base_url }}tags/{{ $tag }}">{{ $tag }}</a>
-    {{ end }}
+    {{- if ne $i 0 }}, {{ end }}
+    <a href="{{ $base_url }}tags/{{ $tag | urlize }}">{{ $tag }}</a>
+    {{- end }}
 </div>
 
 <div class="markdown">
