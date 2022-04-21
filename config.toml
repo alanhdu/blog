@@ -8,3 +8,9 @@ title = "Amateur Hour"
     lineNos = true
     style = "monokai"
     tabWidth = 4
+
+  # See https://github.com/gohugoio/hugo/pull/7435
+  # Install Hugo from https://github.com/fastai/hugo/
+  [markup.goldmark]
+      [markup.goldmark.extensions]
+          mathjax = true
