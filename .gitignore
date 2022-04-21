@@ -8,3 +8,5 @@ public
 
 content/posts
 content/drafts
+
+.hugo_build.lock
