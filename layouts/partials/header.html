@@ -15,13 +15,7 @@
   {{ template "_internal/opengraph.html" . }}
 	<link rel="stylesheet" type="text/css" href="{{ .Site.BaseURL }}css/main.css" />
 
-  {{- if isset .Params "markup" }}
-	<link rel="stylesheet" type="text/css" href="{{ .Site.BaseURL }}css/katex.min.css" />
-  <script defer type="text/javascript" src="{{ .Site.BaseURL }}js/katex.min.js"> </script>
-  <script defer type="text/javascript" src="{{ .Site.BaseURL }}js/auto-render.min.js"
-    onload="renderMathInElement(document.body);"></script>
-  <script defer type="text/javascript" src="{{ .Site.BaseURL }}js/copy-tex.min.js"></script>
-  {{ end }}
+  {{- if .Params.math }}{{ partial "katex.html" . }}{{ end }}
 
   <link rel="apple-touch-icon" sizes="180x180" href="{{ .Site.BaseURL }}favicon//apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="{{ .Site.BaseURL }}favicon/favicon-32x32.png" />
