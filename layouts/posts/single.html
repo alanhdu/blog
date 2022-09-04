@@ -16,7 +16,8 @@
     {{- end }}
 </div>
 
-<div class="markdown">
+<article class="markdown">
+  {{- if .Params.toc }}<aside><strong> Table of Contents </strong> {{.TableOfContents}} </aside>{{ end }}
   {{ .Content }}
-</div>
+</article>
 {{ end }}
