@@ -14,3 +14,5 @@ title = "Amateur Hour"
   [markup.goldmark]
       [markup.goldmark.extensions]
           mathjax = true
+      [markup.goldmark.renderer]
+          unsafe = true
