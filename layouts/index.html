@@ -10,7 +10,7 @@
       <span class="description">  Or {{ .Description }} </span>
     </div>
     {{ end }}
-    {{ template "_internal/pagination.html" . }}
+    {{ template "partials/paginator.html" . }}
   </div>
 </section>
 {{ end }}

@@ -17,7 +17,7 @@ body {
     position: relative;
     width: 40%;
   }
-  article > p, ul, ol, h1, h2, h3, h4, blockquote {
+  article > p, ul, ol, h1, h2, h3, h4, blockquote, div.highlight {
    max-width: 40rem;
   }
 }
@@ -83,3 +83,21 @@ img:not(.cc) {
   margin: 0 auto;
 }
 
+
+.pagination {
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+}
+
+.pagination li {
+    display: inline-block;
+}
+
+.pagination .page-item.page-prev {
+    text-align: left;
+}
+
+.pagination .page-item.page-next {
+    text-align: right;
+}
